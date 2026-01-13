@@ -15,7 +15,7 @@
         .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
         .glossary-item:hover { background-color: #fefce8; border-color: #F2C811; }
         
-        /* Estilos para el cargador de IA */
+        /* IA Loader styles */
         .loader {
             border: 3px solid #f3f3f3;
             border-radius: 50%;
@@ -56,9 +56,9 @@
                 <a href="#inicio" class="hover:text-yellow-400 transition">Home</a>
                 <a href="#decision-tree" class="hover:text-yellow-400 transition">Find Your Path</a>
                 <a href="#ia-tools" class="hover:text-yellow-400 transition">✨ AI Tools</a>
+                <a href="#best-practices" class="hover:text-yellow-400 transition">Best Practices</a>
                 <a href="#glosario" class="hover:text-yellow-400 transition">Glossary</a>
                 <a href="#recursos" class="hover:text-yellow-400 transition">Resources</a>
-                <!-- Gatillo de Configuración -->
                 <button onclick="toggleSettings()" class="text-slate-400 hover:text-white ml-4 p-2 rounded-full border border-slate-700 hover:border-slate-500 transition">
                     <i class="fa-solid fa-cog"></i>
                 </button>
@@ -120,7 +120,7 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-black mb-4">Find Your Role in the Ecosystem</h2>
-                <p class="text-slate-500">How do you interact with data today? Choose an option to see your profile.</p>
+                <p class="text-slate-500">Choose your goal to reveal requirements and missions.</p>
             </div>
 
             <!-- Botones de Decisión -->
@@ -144,7 +144,15 @@
                             <i class="fa-solid fa-user-check text-3xl"></i>
                         </div>
                         <h3 class="text-3xl font-black text-slate-900 mb-2">The Business Consumer</h3>
-                        <p class="text-slate-500">Relies on curated reports to drive decision-making without engaging in data engineering.</p>
+                        <p class="text-slate-500 mb-4">Focuses on interpretation and strategic observation.</p>
+                        <div class="bg-green-50 p-4 rounded-2xl border border-green-100">
+                            <h5 class="text-xs font-bold text-green-700 uppercase mb-2">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-green-800">
+                                <li>• Basic Data Literacy foundations.</li>
+                                <li>• Internal Data Security & Privacy training.</li>
+                                <li>• Power BI Service navigation basics.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
@@ -170,7 +178,16 @@
                             <i class="fa-solid fa-magnifying-glass-chart text-3xl"></i>
                         </div>
                         <h3 class="text-3xl font-black text-slate-900 mb-2">The Citizen Analyst</h3>
-                        <p class="text-slate-500">Creates personal insights, modifies shared reports, and shares with specific teams.</p>
+                        <p class="text-slate-500 mb-4">Bridges raw data with team-specific insights.</p>
+                        <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                            <h5 class="text-xs font-bold text-blue-700 uppercase mb-2">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-blue-800">
+                                <li>• Intermediate Excel & Pivot Table proficiency.</li>
+                                <li>• Power BI Desktop fundamental course.</li>
+                                <li>• Basic DAX (SUM, DIVIDE, CALCULATE).</li>
+                                <li>• Data Visualization design principles.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
@@ -178,7 +195,7 @@
                             <ul class="text-sm space-y-3 text-slate-600">
                                 <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Create personal <b>Dashboards</b> by pinning visuals.</li>
                                 <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Set up <b>Data Alerts</b> and <b>Email Subscriptions</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Use <b>Analyze in Excel</b> for deep spreadsheet exploration.</li>
+                                <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Use <b>Analyze in Excel</b> for deep exploration.</li>
                             </ul>
                         </div>
                         <div>
@@ -196,20 +213,29 @@
                             <i class="fa-solid fa-crown text-3xl"></i>
                         </div>
                         <h3 class="text-3xl font-black text-slate-900 mb-2">The BI Architect</h3>
-                        <p class="text-slate-500">The primary designer responsible for ETL, DAX, RLS, and governance.</p>
+                        <p class="text-slate-500 mb-4">Ensures scalability, governance, and model efficiency.</p>
+                        <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
+                            <h5 class="text-xs font-bold text-purple-700 uppercase mb-2">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-purple-800">
+                                <li>• PL-300 Certification (Data Analyst Assoc).</li>
+                                <li>• Advanced DAX (Context transition, Time Intelligence).</li>
+                                <li>• Star Schema & Dimensional Modeling mastery.</li>
+                                <li>• Admin Portal & Governance policy training.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
                             <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Key Missions</h4>
                             <ul class="text-sm space-y-3 text-slate-600">
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Design <b>Star Schemas</b> and complex <b>DAX</b> measures.</li>
+                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Design <b>Star Schemas</b> and complex <b>DAX</b>.</li>
                                 <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Implement <b>Row-Level Security (RLS)</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Manage <b>Gateways</b> and <b>Dataset Certification</b>.</li>
+                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Manage <b>Gateways</b> and <b>Certification</b>.</li>
                             </ul>
                         </div>
                         <div>
                             <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Licensing Need</h4>
-                            <p class="text-sm text-slate-600">Requires a <b>Pro</b> or <b>Premium Per User (PPU)</b> license for advanced features and governance.</p>
+                            <p class="text-sm text-slate-600">Requires a <b>Pro</b> or <b>Premium Per User (PPU)</b> license for full oversight.</p>
                         </div>
                     </div>
                 </div>
@@ -217,12 +243,12 @@
         </div>
     </section>
 
-    <!-- Centro de IA (Gemini) -->
+    <!-- Centro de IA -->
     <section id="ia-tools" class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-black mb-4">✨ AI-Powered Intelligence</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto">Get expert help with your Power BI challenges. Configure your API key using the gear icon above.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto">Get expert help with your Power BI challenges.</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
@@ -254,7 +280,7 @@
                         <i class="fa-solid fa-bug text-2xl text-red-500 mr-4"></i>
                         <h3 class="text-xl font-bold">Error Mentor</h3>
                     </div>
-                    <textarea id="error-prompt" placeholder="Describe the Power BI error message or performance issue..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-red-400"></textarea>
+                    <textarea id="error-prompt" placeholder="Describe the Power BI error message..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-red-400"></textarea>
                     <button onclick="fixError()" id="btn-error" class="w-full py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition">✨ Fix Issue</button>
                     <div id="error-result" class="mt-4 p-4 bg-red-50 text-red-800 text-xs rounded-xl hidden"></div>
                 </div>
@@ -262,113 +288,128 @@
         </div>
     </section>
 
-    <!-- Glosario Técnico Ampliado -->
-    <section id="glosario" class="py-24 bg-slate-900 text-white">
+    <!-- Sección de Buenas Prácticas -->
+    <section id="best-practices" class="py-24 bg-slate-900 text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-black mb-4 pbi-yellow-text">Comprehensive Technical Glossary</h2>
-            <p class="text-slate-400 mb-12">Essential definitions for the 2026 Power BI & Fabric landscape.</p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Microsoft Fabric</h4>
-                    <p class="text-sm text-slate-300">An all-in-one analytics solution for enterprises that covers everything from data movement to data science, Real-Time Analytics, and business intelligence.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4 pbi-yellow-text">Business Intelligence Best Practices</h2>
+                <p class="text-slate-400">Maximize ROI and adoption with these proven guidelines.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <i class="fa-solid fa-users-viewfinder pbi-yellow-text text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Audience-Centric Design</h4>
+                    <p class="text-sm text-slate-400">Define your 'Who' and 'Why' before creating a single chart. High-level KPIs for execs, granular details for analysts.</p>
                 </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Semantic Model</h4>
-                    <p class="text-sm text-slate-300">Formerly 'Dataset'. Represents the logical model that contains tables, relationships, hierarchies, and DAX measures.</p>
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <i class="fa-solid fa-gauge-high pbi-yellow-text text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Performance First</h4>
+                    <p class="text-sm text-slate-400">Aim for report loads under 5 seconds. Use measures over columns and always leverage the Performance Analyzer.</p>
                 </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Direct Lake</h4>
-                    <p class="text-sm text-slate-300">A groundbreaking storage mode for Fabric that loads data directly from OneLake into the Power BI engine without needing to copy or refresh.</p>
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <i class="fa-solid fa-palette pbi-yellow-text text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Visual Consistency</h4>
+                    <p class="text-sm text-slate-400">Use a standard corporate theme. Maintain consistent colors for the same metrics across all report pages.</p>
                 </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Business Requirements</h4>
-                    <p class="text-sm text-slate-300">The "Why" and "What" of a project. They define strategic goals, such as optimizing profit or tracking regional KPIs.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Functional Requirements</h4>
-                    <p class="text-sm text-slate-300">The "How" of a system. Detailed specifications on software behavior, features, and specific user interactions.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Dataflows</h4>
-                    <p class="text-sm text-slate-300">Cloud-based ETL processes using Power Query to ingest, transform, and load data into Power BI workspaces for reuse.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Row-Level Security (RLS)</h4>
-                    <p class="text-sm text-slate-300">A security layer that restricts data rows based on the user's role (e.g., a manager only sees data for their region).</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Drill-through</h4>
-                    <p class="text-sm text-slate-300">Navigating from a summary chart to a detailed report page that is automatically filtered by the selected data point.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Smart Narratives</h4>
-                    <p class="text-sm text-slate-300">AI-driven text visualizations that provide a plain-language summary of data trends and key insights within a report.</p>
+                <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
+                    <i class="fa-solid fa-shield-halved pbi-yellow-text text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Data Integrity</h4>
+                    <p class="text-sm text-slate-400">Validate totals against ERP/Excel sources. Implement RLS and certify datasets to build organizational trust.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Recursos Restaurados -->
+    <!-- Glosario -->
+    <section id="glosario" class="py-24 bg-white border-y border-slate-200">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-black mb-4">Comprehensive Glossary</h2>
+            <p class="text-slate-500 mb-12">Navigating the terminology of the Modern BI era.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Microsoft Fabric</h4>
+                    <p class="text-sm text-slate-600">The end-to-end data platform that integrates Power BI, Data Factory, and Synapse into a single environment.</p>
+                </div>
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Semantic Model</h4>
+                    <p class="text-sm text-slate-600">The logical representation of your data (tables, DAX, relationships). The brain of your report.</p>
+                </div>
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Direct Lake</h4>
+                    <p class="text-sm text-slate-600">Exclusive Fabric mode that provides Import-like performance by querying files directly in OneLake.</p>
+                </div>
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">OneLake</h4>
+                    <p class="text-sm text-slate-600">Often called the 'OneDrive for Data'. A single, unified, logical data lake for the whole organization.</p>
+                </div>
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Performance Analyzer</h4>
+                    <p class="text-sm text-slate-600">Built-in Desktop tool that shows how long each visual takes to query and render, helping identify bottlenecks.</p>
+                </div>
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Fabric Copilot</h4>
+                    <p class="text-sm text-slate-600">GenAI assistant that helps generate report pages, DAX measures, and narrative insights via natural language.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos -->
     <section id="recursos" class="py-24 container mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black mb-4">Official Resources & Docs</h2>
-            <p class="text-slate-500">Dive deeper with Microsoft's official knowledge base.</p>
+            <h2 class="text-4xl font-black mb-4">Official Documentation & Help</h2>
+            <p class="text-slate-500">Curated resources directly from Microsoft.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
-            <!-- General -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center text-slate-900">
             <a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-book text-2xl"></i>
                 </div>
                 <h4 class="font-bold text-lg mb-2">Power BI Docs</h4>
-                <p class="text-sm text-slate-500">Comprehensive guides for consumers and designers.</p>
+                <p class="text-sm text-slate-500">The complete source of truth for every feature.</p>
             </a>
 
-            <!-- Learn -->
             <a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-green-100 text-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-graduation-cap text-2xl"></i>
                 </div>
-                <h4 class="font-bold text-lg mb-2">Guided Learning</h4>
-                <p class="text-sm text-slate-500">Free, structured learning paths and certifications.</p>
+                <h4 class="font-bold text-lg mb-2">Microsoft Learn</h4>
+                <p class="text-sm text-slate-500">Guided paths and certifications for all levels.</p>
             </a>
 
-            <!-- Community -->
             <a href="https://community.powerbi.com/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-users text-2xl"></i>
                 </div>
-                <h4 class="font-bold text-lg mb-2">User Community</h4>
-                <p class="text-sm text-slate-500">Connect with peers and solve problems in the forums.</p>
+                <h4 class="font-bold text-lg mb-2">Community Forum</h4>
+                <p class="text-sm text-slate-500">Solve specific issues with help from experts.</p>
             </a>
 
-            <!-- DAX -->
             <a href="https://learn.microsoft.com/en-us/dax/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-yellow-100 text-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-code text-2xl"></i>
                 </div>
                 <h4 class="font-bold text-lg mb-2">DAX Reference</h4>
-                <p class="text-sm text-slate-500">Full dictionary of every DAX function and logic.</p>
+                <p class="text-sm text-slate-500">Dictionary of functions and formula logic.</p>
             </a>
 
-            <!-- Blog -->
             <a href="https://powerbi.microsoft.com/en-us/blog/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-orange-100 text-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-bullhorn text-2xl"></i>
                 </div>
-                <h4 class="font-bold text-lg mb-2">Feature Blog</h4>
-                <p class="text-sm text-slate-500">Stay updated with monthly release announcements.</p>
+                <h4 class="font-bold text-lg mb-2">Monthly Updates</h4>
+                <p class="text-sm text-slate-500">Stay current with the latest product news.</p>
             </a>
 
-            <!-- Guidance -->
             <a href="https://learn.microsoft.com/en-us/power-bi/guidance/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
                 <div class="bg-teal-100 text-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <i class="fa-solid fa-lightbulb text-2xl"></i>
                 </div>
                 <h4 class="font-bold text-lg mb-2">Optimization Hub</h4>
-                <p class="text-sm text-slate-500">Best practices for performance and visualization.</p>
+                <p class="text-sm text-slate-500">Best practices for design and speed.</p>
             </a>
         </div>
     </section>
@@ -381,7 +422,6 @@
     </footer>
 
     <script>
-        // API Management
         let internalApiKey = ""; 
         const modelName = "gemini-2.5-flash-preview-09-2025";
 
@@ -393,23 +433,17 @@
             const key = document.getElementById('user-api-key').value.trim();
             if (key) {
                 internalApiKey = key;
-                alert("API Key saved for this session.");
+                alert("API Key saved successfully.");
                 toggleSettings();
             } else {
                 alert("Please enter a valid key.");
             }
         }
 
-        // Path Switcher logic
         function showPath(pathId) {
-            // Hide all
             document.querySelectorAll('.path-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.path-btn').forEach(el => el.classList.remove('bg-slate-900', 'text-white'));
-            
-            // Show selected
             document.getElementById(pathId).classList.add('active');
-            
-            // Highlight button (dynamic styling)
             const btn = Array.from(document.querySelectorAll('.path-btn')).find(b => b.innerText.toLowerCase().includes(pathId));
             if(btn) btn.classList.add('bg-slate-900', 'text-white');
         }
@@ -418,7 +452,7 @@
             const apiKeyToUse = internalApiKey || ""; 
             if (!apiKeyToUse) {
                 toggleSettings();
-                return "ERROR: Missing API Key. Use the settings icon to configure it.";
+                return "ERROR: Missing API Key. Use the gear icon to configure it.";
             }
 
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKeyToUse}`;
@@ -453,9 +487,9 @@
             const resultDiv = document.getElementById('dax-result');
             if (!prompt) return;
             btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Working...`;
+            btn.innerHTML = `<span class="loader"></span> Thinking...`;
             resultDiv.classList.add('hidden');
-            const instruction = "You are a Power BI DAX expert. Generate the requested formula and a 1-line explanation. English response.";
+            const instruction = "You are a Power BI DAX expert. Generate the formula and a 1-line explanation. English response.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
@@ -469,9 +503,9 @@
             const resultDiv = document.getElementById('summary-result');
             if (!prompt) return;
             btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Working...`;
+            btn.innerHTML = `<span class="loader"></span> Summarizing...`;
             resultDiv.classList.add('hidden');
-            const instruction = "Senior Data Analyst role. Provide 3 executive insights from the provided text. English response.";
+            const instruction = "Senior Data Analyst. Provide 3 high-level actionable insights from technical details. English response.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
@@ -485,9 +519,9 @@
             const resultDiv = document.getElementById('error-result');
             if (!prompt) return;
             btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Working...`;
+            btn.innerHTML = `<span class="loader"></span> Troubleshooting...`;
             resultDiv.classList.add('hidden');
-            const instruction = "Power BI Support Specialist. Provide a step-by-step fix for the error. English response.";
+            const instruction = "Power BI Support expert. Provide step-by-step resolution for technical BI error. English response.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
