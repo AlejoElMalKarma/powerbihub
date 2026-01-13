@@ -15,7 +15,6 @@
         .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
         .glossary-item:hover { background-color: #fefce8; border-color: #F2C811; }
         
-        /* IA Loader styles */
         .loader {
             border: 3px solid #f3f3f3;
             border-radius: 50%;
@@ -27,18 +26,15 @@
             vertical-align: middle;
             margin-right: 8px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Transiciones para el árbol de decisión */
         .path-content { display: none; }
         .path-content.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Estilo para el botón de idioma */
+        .lang-btn { transition: all 0.2s ease; }
+        .lang-btn.active { background-color: #F2C811; color: #212121; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -52,20 +48,25 @@
                 </div>
                 <span class="text-xl font-extrabold tracking-tight">Power BI Hub</span>
             </div>
-            <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wider items-center">
-                <a href="#inicio" class="hover:text-yellow-400 transition">Home</a>
-                <a href="#decision-tree" class="hover:text-yellow-400 transition">Find Your Path</a>
-                <a href="#ia-tools" class="hover:text-yellow-400 transition">✨ AI Tools</a>
-                <a href="#best-practices" class="hover:text-yellow-400 transition">Best Practices</a>
-                <a href="#glosario" class="hover:text-yellow-400 transition">Glossary</a>
-                <a href="#recursos" class="hover:text-yellow-400 transition">Resources</a>
-                <button onclick="toggleSettings()" class="text-slate-400 hover:text-white ml-4 p-2 rounded-full border border-slate-700 hover:border-slate-500 transition">
+            <div class="hidden md:flex space-x-6 font-semibold text-sm uppercase tracking-wider items-center">
+                <a href="#inicio" data-t="nav_home" class="hover:text-yellow-400 transition">Home</a>
+                <a href="#decision-tree" data-t="nav_path" class="hover:text-yellow-400 transition">Find Your Path</a>
+                <a href="#ia-tools" data-t="nav_ia" class="hover:text-yellow-400 transition">✨ AI Tools</a>
+                <a href="#best-practices" data-t="nav_bp" class="hover:text-yellow-400 transition">Best Practices</a>
+                <a href="#glosario" data-t="nav_glossary" class="hover:text-yellow-400 transition">Glossary</a>
+                <a href="#recursos" data-t="nav_resources" class="hover:text-yellow-400 transition">Resources</a>
+                
+                <!-- Selector de Idioma -->
+                <div class="flex border border-slate-700 rounded-full overflow-hidden ml-2">
+                    <button onclick="changeLang('en')" id="btn-en" class="lang-btn px-3 py-1 text-xs active">EN</button>
+                    <button onclick="changeLang('es')" id="btn-es" class="lang-btn px-3 py-1 text-xs">ES</button>
+                </div>
+
+                <button onclick="toggleSettings()" class="text-slate-400 hover:text-white ml-2 p-2 rounded-full border border-slate-700 hover:border-slate-500 transition">
                     <i class="fa-solid fa-cog"></i>
                 </button>
             </div>
-            <button class="md:hidden text-white">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
+            <button class="md:hidden text-white"><i class="fa-solid fa-bars text-2xl"></i></button>
         </div>
     </nav>
 
@@ -73,39 +74,39 @@
     <div id="settings-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-slate-900">
             <h3 class="text-2xl font-bold mb-4 flex items-center">
-                <i class="fa-solid fa-key mr-3 text-yellow-500"></i> API Settings
+                <i class="fa-solid fa-key mr-3 text-yellow-500"></i> <span data-t="settings_title">API Settings</span>
             </h3>
-            <p class="text-sm text-slate-600 mb-6">
-                Para usar la IA en entornos externos, ingresa tu <strong>Gemini API Key</strong> de <a href="https://aistudio.google.com/" target="_blank" class="text-blue-600 underline">Google AI Studio</a>.
+            <p class="text-sm text-slate-600 mb-6" data-t="settings_desc">
+                Para usar la IA en entornos externos, ingresa tu <strong>Gemini API Key</strong> de Google AI Studio.
             </p>
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Gemini API Key</label>
-                    <input type="password" id="user-api-key" placeholder="Paste your key here..." class="w-full p-4 bg-slate-100 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-yellow-400">
+                    <input type="password" id="user-api-key" placeholder="Paste key here..." class="w-full p-4 bg-slate-100 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-yellow-400 text-slate-900">
                 </div>
                 <div class="flex space-x-3">
-                    <button onclick="saveApiKey()" class="flex-grow py-3 pbi-yellow text-black font-bold rounded-xl hover:bg-yellow-500 transition">Save Key</button>
-                    <button onclick="toggleSettings()" class="px-6 py-3 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition">Close</button>
+                    <button onclick="saveApiKey()" class="flex-grow py-3 pbi-yellow text-black font-bold rounded-xl hover:bg-yellow-500 transition" data-t="settings_save">Save Key</button>
+                    <button onclick="toggleSettings()" class="px-6 py-3 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition" data-t="settings_close">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Sección Hero -->
+    <!-- Hero Section -->
     <header id="inicio" class="relative bg-white pt-20 pb-32 overflow-hidden">
         <div class="container mx-auto px-6 relative z-10 text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold uppercase mb-4 tracking-widest">Mastering the Ecosystem</span>
+            <span class="inline-block py-1 px-3 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold uppercase mb-4 tracking-widest" data-t="hero_badge">Mastering the Ecosystem</span>
             <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-slate-900">
-                Interactive <span class="pbi-yellow-text">Power BI</span> Learning Hub
+                <span data-t="hero_title_1">Interactive</span> <span class="pbi-yellow-text">Power BI</span> <span data-t="hero_title_2">Learning Hub</span>
             </h1>
-            <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed" data-t="hero_desc">
                 Explore the roles, terminology, and tools needed to transform organizational data into actionable strategic insights.
             </p>
             <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
                 <a href="#decision-tree" class="pbi-yellow text-black px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-yellow-500 transition-all flex items-center justify-center">
-                    Discover Your Path <i class="fa-solid fa-chevron-down ml-2"></i>
+                    <span data-t="hero_btn_path">Discover Your Path</span> <i class="fa-solid fa-chevron-down ml-2"></i>
                 </a>
-                <a href="#ia-tools" class="bg-slate-900 text-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-slate-800 transition-all">
+                <a href="#ia-tools" class="bg-slate-900 text-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-slate-800 transition-all" data-t="hero_btn_ia">
                     ✨ AI Assistant
                 </a>
             </div>
@@ -115,127 +116,98 @@
         </div>
     </header>
 
-    <!-- Árbol de Decisión Interactivo (Paths) -->
+    <!-- Árbol de Decisión Interactivo -->
     <section id="decision-tree" class="py-24 bg-slate-50 border-y border-slate-200">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4">Find Your Role in the Ecosystem</h2>
-                <p class="text-slate-500">Choose your goal to reveal requirements and missions.</p>
+                <h2 class="text-4xl font-black mb-4" data-t="path_title">Find Your Role in the Ecosystem</h2>
+                <p class="text-slate-500" data-t="path_desc">Choose your goal to reveal requirements and missions.</p>
             </div>
 
-            <!-- Botones de Decisión -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="showPath('consumer')" class="path-btn px-6 py-3 rounded-full border-2 border-green-500 text-green-600 font-bold hover:bg-green-500 hover:text-white transition active">
-                    "I want to consume & view reports"
-                </button>
-                <button onclick="showPath('analyst')" class="path-btn px-6 py-3 rounded-full border-2 border-blue-500 text-blue-600 font-bold hover:bg-blue-500 hover:text-white transition">
-                    "I want to analyze & share data"
-                </button>
-                <button onclick="showPath('architect')" class="path-btn px-6 py-3 rounded-full border-2 border-purple-500 text-purple-600 font-bold hover:bg-purple-500 hover:text-white transition">
-                    "I want to build & govern solutions"
-                </button>
+                <button onclick="showPath('consumer')" class="path-btn px-6 py-3 rounded-full border-2 border-green-500 text-green-600 font-bold hover:bg-green-500 hover:text-white transition active" data-t="path_btn_consumer">"I want to consume reports"</button>
+                <button onclick="showPath('analyst')" class="path-btn px-6 py-3 rounded-full border-2 border-blue-500 text-blue-600 font-bold hover:bg-blue-500 hover:text-white transition" data-t="path_btn_analyst">"I want to analyze data"</button>
+                <button onclick="showPath('architect')" class="path-btn px-6 py-3 rounded-full border-2 border-purple-500 text-purple-600 font-bold hover:bg-purple-500 hover:text-white transition" data-t="path_btn_architect">"I want to build solutions"</button>
             </div>
 
-            <!-- Contenido del Camino -->
+            <!-- Contenido del Camino - Consumer -->
             <div id="consumer" class="path-content active bg-white p-10 rounded-3xl shadow-xl border-l-8 border-green-500">
                 <div class="md:flex gap-10">
                     <div class="md:w-1/3 mb-6">
                         <div class="bg-green-100 text-green-600 w-16 h-16 rounded-3xl flex items-center justify-center mb-6">
                             <i class="fa-solid fa-user-check text-3xl"></i>
                         </div>
-                        <h3 class="text-3xl font-black text-slate-900 mb-2">The Business Consumer</h3>
-                        <p class="text-slate-500 mb-4">Focuses on interpretation and strategic observation.</p>
+                        <h3 class="text-3xl font-black text-slate-900 mb-2" data-t="consumer_title">The Business Consumer</h3>
+                        <p class="text-slate-500 mb-4" data-t="consumer_desc">Focuses on interpretation and strategic observation.</p>
                         <div class="bg-green-50 p-4 rounded-2xl border border-green-100">
-                            <h5 class="text-xs font-bold text-green-700 uppercase mb-2">Knowledge Required for License</h5>
-                            <ul class="text-xs space-y-2 text-green-800">
-                                <li>• Basic Data Literacy foundations.</li>
-                                <li>• Internal Data Security & Privacy training.</li>
-                                <li>• Power BI Service navigation basics.</li>
+                            <h5 class="text-xs font-bold text-green-700 uppercase mb-2" data-t="knowledge_header">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-green-800" id="consumer_knowledge_list">
+                                <!-- JS Populated -->
                             </ul>
                         </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Key Missions</h4>
-                            <ul class="text-sm space-y-3 text-slate-600">
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-green-500"></i>Navigate the Power BI Service via <b>Apps</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-green-500"></i>Interact with data using <b>Slicers</b> and <b>Cross-highlighting</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-green-500"></i>Explore details with <b>Focus Mode</b> and <b>Tooltips</b>.</li>
-                            </ul>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="missions_header">Key Missions</h4>
+                            <ul class="text-sm space-y-3 text-slate-600" id="consumer_missions_list"></ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Licensing Need</h4>
-                            <p class="text-sm text-slate-600">Typically requires a <b>Free License</b> if the content is in a <b>Premium Capacity</b>, or a Pro license otherwise.</p>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="licensing_header">Licensing Need</h4>
+                            <p class="text-sm text-slate-600" data-t="consumer_licensing">Typically requires a <b>Free License</b> if content is in Premium Capacity, or Pro otherwise.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Contenido del Camino - Analyst -->
             <div id="analyst" class="path-content bg-white p-10 rounded-3xl shadow-xl border-l-8 border-blue-500">
                 <div class="md:flex gap-10">
                     <div class="md:w-1/3 mb-6">
                         <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-3xl flex items-center justify-center mb-6">
                             <i class="fa-solid fa-magnifying-glass-chart text-3xl"></i>
                         </div>
-                        <h3 class="text-3xl font-black text-slate-900 mb-2">The Citizen Analyst</h3>
-                        <p class="text-slate-500 mb-4">Bridges raw data with team-specific insights.</p>
+                        <h3 class="text-3xl font-black text-slate-900 mb-2" data-t="analyst_title">The Citizen Analyst</h3>
+                        <p class="text-slate-500 mb-4" data-t="analyst_desc">Bridges raw data with team-specific insights.</p>
                         <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                            <h5 class="text-xs font-bold text-blue-700 uppercase mb-2">Knowledge Required for License</h5>
-                            <ul class="text-xs space-y-2 text-blue-800">
-                                <li>• Intermediate Excel & Pivot Table proficiency.</li>
-                                <li>• Power BI Desktop fundamental course.</li>
-                                <li>• Basic DAX (SUM, DIVIDE, CALCULATE).</li>
-                                <li>• Data Visualization design principles.</li>
-                            </ul>
+                            <h5 class="text-xs font-bold text-blue-700 uppercase mb-2" data-t="knowledge_header">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-blue-800" id="analyst_knowledge_list"></ul>
                         </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Key Missions</h4>
-                            <ul class="text-sm space-y-3 text-slate-600">
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Create personal <b>Dashboards</b> by pinning visuals.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Set up <b>Data Alerts</b> and <b>Email Subscriptions</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-blue-500"></i>Use <b>Analyze in Excel</b> for deep exploration.</li>
-                            </ul>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="missions_header">Key Missions</h4>
+                            <ul class="text-sm space-y-3 text-slate-600" id="analyst_missions_list"></ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Licensing Need</h4>
-                            <p class="text-sm text-slate-600">Requires a <b>Pro License</b> to publish to workspaces and share content with peers.</p>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="licensing_header">Licensing Need</h4>
+                            <p class="text-sm text-slate-600" data-t="analyst_licensing">Requires a <b>Pro License</b> to publish to workspaces and share content with peers.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Contenido del Camino - Architect -->
             <div id="architect" class="path-content bg-white p-10 rounded-3xl shadow-xl border-l-8 border-purple-500">
                 <div class="md:flex gap-10">
                     <div class="md:w-1/3 mb-6">
                         <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-3xl flex items-center justify-center mb-6">
                             <i class="fa-solid fa-crown text-3xl"></i>
                         </div>
-                        <h3 class="text-3xl font-black text-slate-900 mb-2">The BI Architect</h3>
-                        <p class="text-slate-500 mb-4">Ensures scalability, governance, and model efficiency.</p>
+                        <h3 class="text-3xl font-black text-slate-900 mb-2" data-t="architect_title">The BI Architect</h3>
+                        <p class="text-slate-500 mb-4" data-t="architect_desc">Ensures scalability, governance, and model efficiency.</p>
                         <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
-                            <h5 class="text-xs font-bold text-purple-700 uppercase mb-2">Knowledge Required for License</h5>
-                            <ul class="text-xs space-y-2 text-purple-800">
-                                <li>• PL-300 Certification (Data Analyst Assoc).</li>
-                                <li>• Advanced DAX (Context transition, Time Intelligence).</li>
-                                <li>• Star Schema & Dimensional Modeling mastery.</li>
-                                <li>• Admin Portal & Governance policy training.</li>
-                            </ul>
+                            <h5 class="text-xs font-bold text-purple-700 uppercase mb-2" data-t="knowledge_header">Knowledge Required for License</h5>
+                            <ul class="text-xs space-y-2 text-purple-800" id="architect_knowledge_list"></ul>
                         </div>
                     </div>
                     <div class="md:w-2/3 grid md:grid-cols-2 gap-8">
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Key Missions</h4>
-                            <ul class="text-sm space-y-3 text-slate-600">
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Design <b>Star Schemas</b> and complex <b>DAX</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Implement <b>Row-Level Security (RLS)</b>.</li>
-                                <li><i class="fa-solid fa-circle-dot mr-2 text-purple-500"></i>Manage <b>Gateways</b> and <b>Certification</b>.</li>
-                            </ul>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="missions_header">Key Missions</h4>
+                            <ul class="text-sm space-y-3 text-slate-600" id="architect_missions_list"></ul>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">Licensing Need</h4>
-                            <p class="text-sm text-slate-600">Requires a <b>Pro</b> or <b>Premium Per User (PPU)</b> license for full oversight.</p>
+                            <h4 class="font-bold text-slate-800 mb-3 border-b pb-2" data-t="licensing_header">Licensing Need</h4>
+                            <p class="text-sm text-slate-600" data-t="architect_licensing">Requires a <b>Pro</b> or <b>PPU</b> license for full oversight.</p>
                         </div>
                     </div>
                 </div>
@@ -247,8 +219,8 @@
     <section id="ia-tools" class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4">✨ AI-Powered Intelligence</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto">Get expert help with your Power BI challenges.</p>
+                <h2 class="text-4xl font-black mb-4" data-t="ia_title">✨ AI-Powered Intelligence</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto" data-t="ia_desc">Get expert help with your Power BI challenges.</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
@@ -256,10 +228,10 @@
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
                     <div class="flex items-center mb-6">
                         <i class="fa-solid fa-calculator text-2xl text-yellow-500 mr-4"></i>
-                        <h3 class="text-xl font-bold">DAX Assistant</h3>
+                        <h3 class="text-xl font-bold" data-t="ia_dax_title">DAX Assistant</h3>
                     </div>
-                    <textarea id="dax-prompt" placeholder="E.g.: Calculate Year-over-Year sales growth..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
-                    <button onclick="generateDAX()" id="btn-dax" class="w-full py-3 pbi-yellow text-black font-bold rounded-xl hover:bg-yellow-500 transition">✨ Generate DAX</button>
+                    <textarea id="dax-prompt" placeholder="E.g.: Calculate Year-over-Year sales growth..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-yellow-400 text-slate-900"></textarea>
+                    <button onclick="generateDAX()" id="btn-dax" class="w-full py-3 pbi-yellow text-black font-bold rounded-xl hover:bg-yellow-500 transition" data-t="ia_dax_btn">✨ Generate DAX</button>
                     <div id="dax-result" class="mt-4 p-4 bg-slate-900 text-green-400 font-mono text-xs rounded-xl hidden whitespace-pre-wrap"></div>
                 </div>
 
@@ -267,10 +239,10 @@
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
                     <div class="flex items-center mb-6">
                         <i class="fa-solid fa-file-invoice text-2xl text-blue-500 mr-4"></i>
-                        <h3 class="text-xl font-bold">Project Summarizer</h3>
+                        <h3 class="text-xl font-bold" data-t="ia_sum_title">Project Summarizer</h3>
                     </div>
-                    <textarea id="summary-prompt" placeholder="Paste technical project details or report requirements..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-                    <button onclick="generateSummary()" id="btn-summary" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition">✨ Summarize Insights</button>
+                    <textarea id="summary-prompt" placeholder="Paste technical project details..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-blue-400 text-slate-900"></textarea>
+                    <button onclick="generateSummary()" id="btn-summary" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition" data-t="ia_sum_btn">✨ Summarize Insights</button>
                     <div id="summary-result" class="mt-4 p-4 bg-blue-50 text-blue-800 text-xs rounded-xl hidden"></div>
                 </div>
 
@@ -278,44 +250,44 @@
                 <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
                     <div class="flex items-center mb-6">
                         <i class="fa-solid fa-bug text-2xl text-red-500 mr-4"></i>
-                        <h3 class="text-xl font-bold">Error Mentor</h3>
+                        <h3 class="text-xl font-bold" data-t="ia_error_title">Error Mentor</h3>
                     </div>
-                    <textarea id="error-prompt" placeholder="Describe the Power BI error message..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-red-400"></textarea>
-                    <button onclick="fixError()" id="btn-error" class="w-full py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition">✨ Fix Issue</button>
+                    <textarea id="error-prompt" placeholder="Describe the Power BI error message..." class="w-full h-24 p-4 text-sm bg-white border border-slate-200 rounded-xl mb-4 resize-none outline-none focus:ring-2 focus:ring-red-400 text-slate-900"></textarea>
+                    <button onclick="fixError()" id="btn-error" class="w-full py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition" data-t="ia_error_btn">✨ Fix Issue</button>
                     <div id="error-result" class="mt-4 p-4 bg-red-50 text-red-800 text-xs rounded-xl hidden"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Buenas Prácticas -->
+    <!-- Buenas Prácticas -->
     <section id="best-practices" class="py-24 bg-slate-900 text-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4 pbi-yellow-text">Business Intelligence Best Practices</h2>
-                <p class="text-slate-400">Maximize ROI and adoption with these proven guidelines.</p>
+                <h2 class="text-4xl font-black mb-4 pbi-yellow-text" data-t="bp_title">Business Intelligence Best Practices</h2>
+                <p class="text-slate-400" data-t="bp_desc">Maximize ROI and adoption with these proven guidelines.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
                     <i class="fa-solid fa-users-viewfinder pbi-yellow-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Audience-Centric Design</h4>
-                    <p class="text-sm text-slate-400">Define your 'Who' and 'Why' before creating a single chart. High-level KPIs for execs, granular details for analysts.</p>
+                    <h4 class="font-bold mb-2" data-t="bp_1_t">Audience-Centric Design</h4>
+                    <p class="text-sm text-slate-400" data-t="bp_1_d">Define your 'Who' and 'Why' before creating a single chart. KPIs for execs, details for analysts.</p>
                 </div>
                 <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
                     <i class="fa-solid fa-gauge-high pbi-yellow-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Performance First</h4>
-                    <p class="text-sm text-slate-400">Aim for report loads under 5 seconds. Use measures over columns and always leverage the Performance Analyzer.</p>
+                    <h4 class="font-bold mb-2" data-t="bp_2_t">Performance First</h4>
+                    <p class="text-sm text-slate-400" data-t="bp_2_d">Aim for loads under 5s. Use measures over columns and always leverage the Performance Analyzer.</p>
                 </div>
                 <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
                     <i class="fa-solid fa-palette pbi-yellow-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Visual Consistency</h4>
-                    <p class="text-sm text-slate-400">Use a standard corporate theme. Maintain consistent colors for the same metrics across all report pages.</p>
+                    <h4 class="font-bold mb-2" data-t="bp_3_t">Visual Consistency</h4>
+                    <p class="text-sm text-slate-400" data-t="bp_3_d">Use a standard corporate theme. Maintain consistent colors for the same metrics across pages.</p>
                 </div>
                 <div class="p-6 bg-white/5 rounded-2xl border border-white/10 card-hover">
                     <i class="fa-solid fa-shield-halved pbi-yellow-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Data Integrity</h4>
-                    <p class="text-sm text-slate-400">Validate totals against ERP/Excel sources. Implement RLS and certify datasets to build organizational trust.</p>
+                    <h4 class="font-bold mb-2" data-t="bp_4_t">Data Integrity</h4>
+                    <p class="text-sm text-slate-400" data-t="bp_4_d">Validate totals against ERP sources. Implement RLS and certify datasets to build trust.</p>
                 </div>
             </div>
         </div>
@@ -324,120 +296,171 @@
     <!-- Glosario -->
     <section id="glosario" class="py-24 bg-white border-y border-slate-200">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-black mb-4">Comprehensive Glossary</h2>
-            <p class="text-slate-500 mb-12">Navigating the terminology of the Modern BI era.</p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Microsoft Fabric</h4>
-                    <p class="text-sm text-slate-600">The end-to-end data platform that integrates Power BI, Data Factory, and Synapse into a single environment.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Semantic Model</h4>
-                    <p class="text-sm text-slate-600">The logical representation of your data (tables, DAX, relationships). The brain of your report.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Direct Lake</h4>
-                    <p class="text-sm text-slate-600">Exclusive Fabric mode that provides Import-like performance by querying files directly in OneLake.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">OneLake</h4>
-                    <p class="text-sm text-slate-600">Often called the 'OneDrive for Data'. A single, unified, logical data lake for the whole organization.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Performance Analyzer</h4>
-                    <p class="text-sm text-slate-600">Built-in Desktop tool that shows how long each visual takes to query and render, helping identify bottlenecks.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all group">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Fabric Copilot</h4>
-                    <p class="text-sm text-slate-600">GenAI assistant that helps generate report pages, DAX measures, and narrative insights via natural language.</p>
-                </div>
-            </div>
+            <h2 class="text-4xl font-black mb-4" data-t="glossary_title">Comprehensive Glossary</h2>
+            <p class="text-slate-500 mb-12" data-t="glossary_desc">Navigating the terminology of the Modern BI era.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="glossary_container"></div>
         </div>
     </section>
 
     <!-- Recursos -->
     <section id="recursos" class="py-24 container mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-black mb-4">Official Documentation & Help</h2>
-            <p class="text-slate-500">Curated resources directly from Microsoft.</p>
+            <h2 class="text-4xl font-black mb-4" data-t="resources_title">Official Documentation & Help</h2>
+            <p class="text-slate-500" data-t="resources_desc">Curated resources directly from Microsoft.</p>
         </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center text-slate-900">
-            <a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-book text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Power BI Docs</h4>
-                <p class="text-sm text-slate-500">The complete source of truth for every feature.</p>
-            </a>
-
-            <a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-green-100 text-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Microsoft Learn</h4>
-                <p class="text-sm text-slate-500">Guided paths and certifications for all levels.</p>
-            </a>
-
-            <a href="https://community.powerbi.com/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-users text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Community Forum</h4>
-                <p class="text-sm text-slate-500">Solve specific issues with help from experts.</p>
-            </a>
-
-            <a href="https://learn.microsoft.com/en-us/dax/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-yellow-100 text-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-code text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">DAX Reference</h4>
-                <p class="text-sm text-slate-500">Dictionary of functions and formula logic.</p>
-            </a>
-
-            <a href="https://powerbi.microsoft.com/en-us/blog/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-orange-100 text-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-bullhorn text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Monthly Updates</h4>
-                <p class="text-sm text-slate-500">Stay current with the latest product news.</p>
-            </a>
-
-            <a href="https://learn.microsoft.com/en-us/power-bi/guidance/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-teal-100 text-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-lightbulb text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Optimization Hub</h4>
-                <p class="text-sm text-slate-500">Best practices for design and speed.</p>
-            </a>
-        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-center text-slate-900" id="resources_container"></div>
     </section>
 
-    <!-- Footer -->
     <footer class="pbi-dark py-12 text-white/50 text-center">
         <div class="container mx-auto px-6">
-            <p class="text-xs">&copy; 2026 Power BI Study Guide + Gemini AI.</p>
+            <p class="text-xs" data-t="footer_text">&copy; 2026 Power BI Study Guide + Gemini AI.</p>
         </div>
     </footer>
 
     <script>
         let internalApiKey = ""; 
+        let currentLang = 'en';
         const modelName = "gemini-2.5-flash-preview-09-2025";
 
-        function toggleSettings() {
-            document.getElementById('settings-modal').classList.toggle('hidden');
+        const translations = {
+            en: {
+                nav_home: "Home", nav_path: "Find Your Path", nav_ia: "✨ AI Tools", nav_bp: "Best Practices", nav_glossary: "Glossary", nav_resources: "Resources",
+                settings_title: "API Settings", settings_desc: "To use AI in external environments, enter your Gemini API Key from Google AI Studio.", settings_save: "Save Key", settings_close: "Close",
+                hero_badge: "Mastering the Ecosystem", hero_title_1: "Interactive", hero_title_2: "Learning Hub", hero_desc: "Explore roles, terminology, and tools to transform data into strategic insights.", hero_btn_path: "Discover Your Path", hero_btn_ia: "✨ AI Assistant",
+                path_title: "Find Your Role in the Ecosystem", path_desc: "Choose your goal to reveal requirements and missions.", path_btn_consumer: '"I want to consume reports"', path_btn_analyst: '"I want to analyze data"', path_btn_architect: '"I want to build solutions"',
+                consumer_title: "The Business Consumer", consumer_desc: "Focuses on interpretation and strategic observation.", consumer_licensing: "Typically requires a <b>Free License</b> if content is in Premium Capacity, or Pro otherwise.",
+                analyst_title: "The Citizen Analyst", analyst_desc: "Bridges raw data with team-specific insights.", analyst_licensing: "Requires a <b>Pro License</b> to publish and share content with peers.",
+                architect_title: "The BI Architect", architect_desc: "Ensures scalability, governance, and model efficiency.", architect_licensing: "Requires a <b>Pro</b> or <b>PPU</b> license for full oversight.",
+                knowledge_header: "Knowledge Required for License", missions_header: "Key Missions", licensing_header: "Licensing Need",
+                ia_title: "✨ AI-Powered Intelligence", ia_desc: "Get expert help with your Power BI challenges.", ia_dax_title: "DAX Assistant", ia_dax_btn: "✨ Generate DAX", ia_sum_title: "Project Summarizer", ia_sum_btn: "✨ Summarize Insights", ia_error_title: "Error Mentor", ia_error_btn: "✨ Fix Issue",
+                bp_title: "Business Intelligence Best Practices", bp_desc: "Maximize ROI and adoption with these proven guidelines.",
+                bp_1_t: "Audience-Centric Design", bp_1_d: "Define 'Who' and 'Why' first. KPIs for execs, details for analysts.",
+                bp_2_t: "Performance First", bp_2_d: "Aim for loads under 5s. Use measures and Performance Analyzer.",
+                bp_3_t: "Visual Consistency", bp_3_d: "Use a standard theme. Consistent colors for metrics across pages.",
+                bp_4_t: "Data Integrity", bp_4_d: "Validate totals against ERP sources. Implement RLS and certification.",
+                glossary_title: "Comprehensive Glossary", glossary_desc: "Navigating terminology of the Modern BI era.",
+                resources_title: "Official Documentation & Help", resources_desc: "Curated resources directly from Microsoft.",
+                footer_text: "© 2026 Power BI Study Guide + Gemini AI."
+            },
+            es: {
+                nav_home: "Inicio", nav_path: "Tu Ruta", nav_ia: "✨ Herramientas IA", nav_bp: "Buenas Prácticas", nav_glossary: "Glosario", nav_resources: "Recursos",
+                settings_title: "Configuración API", settings_desc: "Ingresa tu Gemini API Key de Google AI Studio para activar la inteligencia artificial.", settings_save: "Guardar Clave", settings_close: "Cerrar",
+                hero_badge: "Dominando el Ecosistema", hero_title_1: "Portal", hero_title_2: "de Aprendizaje", hero_desc: "Explora roles, términos y herramientas para transformar datos en decisiones estratégicas.", hero_btn_path: "Descubre tu Ruta", hero_btn_ia: "✨ Asistente IA",
+                path_title: "Encuentra tu Rol en el Ecosistema", path_desc: "Elige tu objetivo para ver requisitos y misiones.", path_btn_consumer: '"Quiero consumir reportes"', path_btn_analyst: '"Quiero analizar datos"', path_btn_architect: '"Quiero crear soluciones"',
+                consumer_title: "Consumidor de Negocio", consumer_desc: "Enfocado en interpretación y observación estratégica.", consumer_licensing: "Requiere <b>Licencia Gratuita</b> si el contenido está en Capacidad Premium, o Pro de lo contrario.",
+                analyst_title: "Analista Ciudadano", analyst_desc: "Une los datos crudos con hallazgos para el equipo.", analyst_licensing: "Requiere <b>Licencia Pro</b> para publicar y compartir contenido.",
+                architect_title: "Arquitecto de BI", architect_desc: "Garantiza escalabilidad, gobierno y eficiencia del modelo.", architect_licensing: "Requiere licencia <b>Pro</b> o <b>PPU</b> para administración total.",
+                knowledge_header: "Formación Necesaria para Licencia", missions_header: "Misiones Clave", licensing_header: "Licenciamiento",
+                ia_title: "✨ Inteligencia Potenciada por IA", ia_desc: "Obtén ayuda experta para tus retos de Power BI.", ia_dax_title: "Asistente DAX", ia_dax_btn: "✨ Generar DAX", ia_sum_title: "Resumen de Proyecto", ia_sum_btn: "✨ Resumir Hallazgos", ia_error_title: "Mentor de Errores", ia_error_btn: "✨ Solucionar Error",
+                bp_title: "Buenas Prácticas de BI", bp_desc: "Maximiza el retorno de inversión y la adopción con estas guías.",
+                bp_1_t: "Diseño para la Audiencia", bp_1_d: "Define el 'Quién' y 'Por qué'. KPIs para jefes, detalles para analistas.",
+                bp_2_t: "Prioridad: Rendimiento", bp_2_d: "Carga en <5s. Usa medidas y el Analizador de Rendimiento.",
+                bp_3_t: "Consistencia Visual", bp_3_d: "Usa temas corporativos y colores consistentes en todo el reporte.",
+                bp_4_t: "Integridad de Datos", bp_4_d: "Valida contra ERP. Implementa RLS y certifica los conjuntos de datos.",
+                glossary_title: "Glosario Integral", glossary_desc: "Navegando la terminología de la era moderna de BI.",
+                resources_title: "Documentación y Ayuda Oficial", resources_desc: "Recursos directos de Microsoft.",
+                footer_text: "© 2026 Guía de Power BI + Gemini IA."
+            }
+        };
+
+        const data = {
+            knowledge: {
+                en: {
+                    consumer: ["Basic Data Literacy foundations.", "Internal Security training.", "Service navigation basics."],
+                    analyst: ["Intermediate Excel & Pivot Tables.", "Power BI Desktop basic course.", "Basic DAX (SUM, DIVIDE).", "Data Viz principles."],
+                    architect: ["PL-300 Certification.", "Advanced DAX Mastery.", "Star Schema & Dimensional Modeling.", "Admin & Governance training."]
+                },
+                es: {
+                    consumer: ["Fundamentos de alfabetización de datos.", "Capacitación en seguridad interna.", "Navegación básica del Servicio."],
+                    analyst: ["Excel intermedio y Tablas dinámicas.", "Curso básico de Power BI Desktop.", "DAX básico (SUM, CALCULATE).", "Principios de visualización."],
+                    architect: ["Certificación PL-300.", "Maestría en DAX avanzado.", "Esquema Estrella y Modelado Dimensional.", "Gobierno y portal de administración."]
+                }
+            },
+            missions: {
+                en: {
+                    consumer: ["Navigate via Apps.", "Use Slicers and Highlighting.", "Focus Mode and Tooltips."],
+                    analyst: ["Create personal Dashboards.", "Set alerts and subscriptions.", "Deep Analyze in Excel."],
+                    architect: ["Design Star Schemas.", "Implement RLS security.", "Manage Gateways and Certification."]
+                },
+                es: {
+                    consumer: ["Navegar a través de Apps.", "Usar Slicers y Resaltado cruzado.", "Modo Enfoque e Información emergente."],
+                    analyst: ["Crear Paneles personales.", "Configurar alertas y suscripciones.", "Análisis profundo en Excel."],
+                    architect: ["Diseñar Modelos en Estrella.", "Implementar Seguridad RLS.", "Gestionar Gateways y Certificación."]
+                }
+            },
+            glossary: {
+                en: [
+                    { t: "Microsoft Fabric", d: "Unified data platform integrating BI, Data Factory, and Synapse." },
+                    { t: "Semantic Model", d: "Formerly 'Dataset'. Brain of the report (tables, logic, DAX)." },
+                    { t: "Direct Lake", d: "Fabric mode querying OneLake files directly without refresh." },
+                    { t: "Performance Analyzer", d: "Desktop tool to find rendering and query bottlenecks." },
+                    { t: "RLS", d: "Row-Level Security. Restricts data based on user identity." },
+                    { t: "Fabric Copilot", d: "GenAI for creating reports and DAX measures via chat." }
+                ],
+                es: [
+                    { t: "Microsoft Fabric", d: "Plataforma de datos unificada que integra BI, Data Factory y Synapse." },
+                    { t: "Modelo Semántico", d: "Antes 'Dataset'. El cerebro del reporte (tablas, lógica, DAX)." },
+                    { t: "Direct Lake", d: "Modo de Fabric que consulta archivos en OneLake sin refresco." },
+                    { t: "Analizador de Rendimiento", d: "Herramienta de Desktop para hallar cuellos de botella." },
+                    { t: "RLS", d: "Seguridad a nivel de fila. Filtra datos según el usuario." },
+                    { t: "Fabric Copilot", d: "IA generativa para crear reportes y DAX vía chat." }
+                ]
+            }
+        };
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+
+            // Update lists
+            ['consumer', 'analyst', 'architect'].forEach(role => {
+                const kList = document.getElementById(`${role}_knowledge_list`);
+                const mList = document.getElementById(`${role}_missions_list`);
+                kList.innerHTML = data.knowledge[lang][role].map(i => `<li>• ${i}</li>`).join('');
+                mList.innerHTML = data.missions[lang][role].map(i => `<li><i class="fa-solid fa-circle-dot mr-2 text-${role === 'consumer' ? 'green' : role === 'analyst' ? 'blue' : 'purple'}-500"></i>${i}</li>`).join('');
+            });
+
+            // Update Glossary
+            document.getElementById('glossary_container').innerHTML = data.glossary[lang].map(i => `
+                <div class="glossary-item p-6 rounded-2xl border border-slate-200 transition-all">
+                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">${i.t}</h4>
+                    <p class="text-sm text-slate-600">${i.d}</p>
+                </div>
+            `).join('');
+
+            // Update Resources
+            const res = [
+                { id: "Docs", icon: "fa-book", c: "blue", url: "power-bi", t_en: "Power BI Docs", d_en: "Source of truth for every feature.", t_es: "Documentos Power BI", d_es: "La fuente de verdad de cada función." },
+                { id: "Learn", icon: "fa-graduation-cap", c: "green", url: "training/powerplatform/power-bi", t_en: "Guided Learning", d_en: "Paths and certifications for all.", t_es: "Aprendizaje Guiado", d_es: "Rutas y certificaciones para todos." },
+                { id: "Community", icon: "fa-users", c: "purple", url: "https://community.powerbi.com/", absolute: true, t_en: "Community", d_en: "Solve issues with experts.", t_es: "Comunidad", d_es: "Resuelve dudas con expertos." },
+                { id: "DAX", icon: "fa-code", c: "yellow", url: "dax", t_en: "DAX Reference", d_en: "Dictionary of logic and functions.", t_es: "Referencia DAX", d_es: "Diccionario de lógica y funciones." },
+                { id: "Blog", icon: "fa-bullhorn", c: "orange", url: "https://powerbi.microsoft.com/en-us/blog/", absolute: true, t_en: "Feature Blog", d_en: "Latest monthly product news.", t_es: "Blog de Novedades", d_es: "Novedades mensuales del producto." },
+                { id: "Optimization", icon: "fa-lightbulb", c: "teal", url: "power-bi/guidance", t_en: "Optimization Hub", d_en: "Best practices for speed.", t_es: "Centro Optimización", d_es: "Mejores prácticas de velocidad." }
+            ];
+            document.getElementById('resources_container').innerHTML = res.map(i => `
+                <a href="${i.absolute ? i.url : `https://learn.microsoft.com/${lang === 'en' ? 'en-us' : 'es-es'}/${i.url}`}" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
+                    <div class="bg-${i.c}-100 text-${i.c}-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-${i.c}-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid ${i.icon} text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">${lang === 'en' ? i.t_en : i.t_es}</h4>
+                    <p class="text-sm text-slate-500">${lang === 'en' ? i.d_en : i.d_es}</p>
+                </a>
+            `).join('');
+
+            // Highlight button
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
         }
 
+        // Settings logic
+        function toggleSettings() { document.getElementById('settings-modal').classList.toggle('hidden'); }
         function saveApiKey() {
             const key = document.getElementById('user-api-key').value.trim();
-            if (key) {
-                internalApiKey = key;
-                alert("API Key saved successfully.");
-                toggleSettings();
-            } else {
-                alert("Please enter a valid key.");
-            }
+            if (key) { internalApiKey = key; alert(currentLang === 'en' ? "Key saved." : "Clave guardada."); toggleSettings(); }
+            else alert(currentLang === 'en' ? "Invalid key." : "Clave inválida.");
         }
 
         function showPath(pathId) {
@@ -448,86 +471,50 @@
             if(btn) btn.classList.add('bg-slate-900', 'text-white');
         }
 
+        // IA Functions
         async function callGemini(prompt, systemInstruction) {
             const apiKeyToUse = internalApiKey || ""; 
-            if (!apiKeyToUse) {
-                toggleSettings();
-                return "ERROR: Missing API Key. Use the gear icon to configure it.";
-            }
-
+            if (!apiKeyToUse) { toggleSettings(); return currentLang === 'en' ? "ERROR: Missing API Key." : "ERROR: Falta API Key."; }
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKeyToUse}`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
+                systemInstruction: { parts: [{ text: systemInstruction + ` Response language: ${currentLang}` }] }
             };
-
             let delay = 1000;
             for (let i = 0; i < 5; i++) {
                 try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (response.status === 401 || response.status === 403) return "ERROR: Invalid API Key.";
+                    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (response.status === 401 || response.status === 403) return "ERROR: Invalid Key.";
                     if (!response.ok) throw new Error('API Error');
                     const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-                } catch (error) {
-                    if (i === 4) return "Connection error. Try again later.";
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2;
-                }
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+                } catch (error) { if (i === 4) return "Error."; await new Promise(r => setTimeout(r, delay)); delay *= 2; }
             }
         }
 
         async function generateDAX() {
-            const prompt = document.getElementById('dax-prompt').value;
-            const btn = document.getElementById('btn-dax');
-            const resultDiv = document.getElementById('dax-result');
-            if (!prompt) return;
-            btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Thinking...`;
-            resultDiv.classList.add('hidden');
-            const instruction = "You are a Power BI DAX expert. Generate the formula and a 1-line explanation. English response.";
-            const response = await callGemini(prompt, instruction);
-            resultDiv.textContent = response;
-            resultDiv.classList.remove('hidden');
-            btn.disabled = false;
-            btn.innerHTML = `✨ Generate DAX`;
+            const p = document.getElementById('dax-prompt').value; const b = document.getElementById('btn-dax'); const r = document.getElementById('dax-result');
+            if (!p) return; b.disabled = true; b.innerHTML = `<span class="loader"></span>...`; r.classList.add('hidden');
+            const res = await callGemini(p, "Power BI DAX expert. Clean formula + 1 line info.");
+            r.textContent = res; r.classList.remove('hidden'); b.disabled = false; b.innerHTML = translations[currentLang].ia_dax_btn;
         }
 
         async function generateSummary() {
-            const prompt = document.getElementById('summary-prompt').value;
-            const btn = document.getElementById('btn-summary');
-            const resultDiv = document.getElementById('summary-result');
-            if (!prompt) return;
-            btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Summarizing...`;
-            resultDiv.classList.add('hidden');
-            const instruction = "Senior Data Analyst. Provide 3 high-level actionable insights from technical details. English response.";
-            const response = await callGemini(prompt, instruction);
-            resultDiv.textContent = response;
-            resultDiv.classList.remove('hidden');
-            btn.disabled = false;
-            btn.innerHTML = `✨ Summarize Insights`;
+            const p = document.getElementById('summary-prompt').value; const b = document.getElementById('btn-summary'); const r = document.getElementById('summary-result');
+            if (!p) return; b.disabled = true; b.innerHTML = `<span class="loader"></span>...`; r.classList.add('hidden');
+            const res = await callGemini(p, "Senior Data Analyst. 3 exec insights.");
+            r.textContent = res; r.classList.remove('hidden'); b.disabled = false; b.innerHTML = translations[currentLang].ia_sum_btn;
         }
 
         async function fixError() {
-            const prompt = document.getElementById('error-prompt').value;
-            const btn = document.getElementById('btn-error');
-            const resultDiv = document.getElementById('error-result');
-            if (!prompt) return;
-            btn.disabled = true;
-            btn.innerHTML = `<span class="loader"></span> Troubleshooting...`;
-            resultDiv.classList.add('hidden');
-            const instruction = "Power BI Support expert. Provide step-by-step resolution for technical BI error. English response.";
-            const response = await callGemini(prompt, instruction);
-            resultDiv.textContent = response;
-            resultDiv.classList.remove('hidden');
-            btn.disabled = false;
-            btn.innerHTML = `✨ Fix Issue`;
+            const p = document.getElementById('error-prompt').value; const b = document.getElementById('btn-error'); const r = document.getElementById('error-result');
+            if (!p) return; b.disabled = true; b.innerHTML = `<span class="loader"></span>...`; r.classList.add('hidden');
+            const res = await callGemini(p, "BI Support specialist. Fix steps.");
+            r.textContent = res; r.classList.remove('hidden'); b.disabled = false; b.innerHTML = translations[currentLang].ia_error_btn;
         }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => changeLang('en'));
     </script>
 </body>
 </html>
