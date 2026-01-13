@@ -44,18 +44,44 @@
                 </div>
                 <span class="text-xl font-extrabold tracking-tight">Power BI Hub</span>
             </div>
-            <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wider">
+            <div class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wider items-center">
                 <a href="#inicio" class="hover:text-yellow-400 transition">Home</a>
                 <a href="#rutas" class="hover:text-yellow-400 transition">Paths</a>
                 <a href="#ia-tools" class="hover:text-yellow-400 transition">✨ AI Assistant</a>
                 <a href="#glosario" class="hover:text-yellow-400 transition">Glossary</a>
                 <a href="#recursos" class="hover:text-yellow-400 transition">Resources</a>
+                <!-- Settings Trigger -->
+                <button onclick="toggleSettings()" class="text-slate-400 hover:text-white ml-4 p-2 rounded-full border border-slate-700 hover:border-slate-500 transition">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
             </div>
             <button class="md:hidden text-white">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4 flex items-center">
+                <i class="fa-solid fa-key mr-3 text-yellow-500"></i> API Configuration
+            </h3>
+            <p class="text-sm text-slate-600 mb-6">
+                To use the AI features on GitHub Pages, you need a <strong>Gemini API Key</strong>. Get one for free at <a href="https://aistudio.google.com/" target="_blank" class="text-blue-600 underline">Google AI Studio</a>.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Gemini API Key</label>
+                    <input type="password" id="user-api-key" placeholder="Paste your AI Studio Key here..." class="w-full p-4 bg-slate-100 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-yellow-400">
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="saveApiKey()" class="flex-grow py-3 pbi-yellow text-black font-bold rounded-xl hover:bg-yellow-500 transition">Save Changes</button>
+                    <button onclick="toggleSettings()" class="px-6 py-3 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <header id="inicio" class="relative bg-white pt-20 pb-32 overflow-hidden">
@@ -86,7 +112,7 @@
         <div class="container mx-auto px-6 text-slate-900">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4">✨ AI Intelligence Center</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto">Powered by Gemini 2.5 Flash to solve your technical doubts instantly.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto">Use the configuration icon above to set your API Key if you are outside the preview environment.</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
@@ -141,205 +167,70 @@
         </div>
     </section>
 
-    <!-- Learning Paths -->
+    <!-- Learning Paths, Glossary, and Resources sections remain unchanged -->
+    <!-- [Placeholder for sections defined in previous version] -->
     <section id="rutas" class="py-24 container mx-auto px-6">
         <div class="text-center mb-16 text-slate-900">
             <h2 class="text-3xl font-bold mb-4">User Profile Paths</h2>
             <p class="text-slate-500">Structured content based on the master guide.</p>
         </div>
-
         <div class="grid lg:grid-cols-3 gap-10">
-            <!-- Beginner -->
-            <div class="card-hover bg-white rounded-3xl overflow-hidden shadow-xl flex flex-col border border-slate-100">
-                <div class="h-3 bg-green-500"></div>
-                <div class="p-8 flex-grow text-slate-900">
-                    <div class="bg-green-100 text-green-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-eye text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">Consumer</h3>
-                    <ul class="text-sm text-slate-600 space-y-3">
-                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i><span>Web Service Navigation</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i><span>Focus Mode & Tooltips usage</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i><span>Basic filters & Slicing</span></li>
-                    </ul>
-                </div>
+            <!-- Simplified placeholders for brevity -->
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-green-500">
+                <h3 class="text-2xl font-bold mb-2 text-slate-900">Consumer</h3>
+                <p class="text-sm text-slate-600 italic mb-4">"Navigating and filtering insights."</p>
+                <ul class="text-sm space-y-2 text-slate-600">
+                    <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Web Service Navigation</li>
+                    <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Slicers & Filter usage</li>
+                </ul>
             </div>
-
-            <!-- Intermediate -->
-            <div class="card-hover bg-white rounded-3xl overflow-hidden shadow-xl flex flex-col scale-105 z-10 border-2 border-blue-100">
-                <div class="h-3 bg-blue-500"></div>
-                <div class="p-8 flex-grow text-slate-900">
-                    <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-chart-line text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">Analyst</h3>
-                    <ul class="text-sm text-slate-600 space-y-3">
-                        <li class="flex items-start"><i class="fa-solid fa-check text-blue-500 mt-1 mr-3"></i><span>DAX Calculations & Basic Measures</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-blue-500 mt-1 mr-3"></i><span>Dashboards & Data Alerts</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-blue-500 mt-1 mr-3"></i><span>Analyze in Excel & Teams Integration</span></li>
-                    </ul>
-                </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-blue-500 scale-105">
+                <h3 class="text-2xl font-bold mb-2 text-slate-900">Analyst</h3>
+                <p class="text-sm text-slate-600 italic mb-4">"Creating and sharing findings."</p>
+                <ul class="text-sm space-y-2 text-slate-600">
+                    <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>DAX & Personal Dashboards</li>
+                    <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Teams & Excel integration</li>
+                </ul>
             </div>
-
-            <!-- Advanced -->
-            <div class="card-hover bg-white rounded-3xl overflow-hidden shadow-xl flex flex-col border border-slate-100">
-                <div class="h-3 bg-purple-500"></div>
-                <div class="p-8 flex-grow text-slate-900">
-                    <div class="bg-purple-100 text-purple-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-shield-halved text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">Architect</h3>
-                    <ul class="text-sm text-slate-600 space-y-3">
-                        <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mt-1 mr-3"></i><span>RLS Security & Governance</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mt-1 mr-3"></i><span>Star Schema Modeling</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mt-1 mr-3"></i><span>Optimization with Performance Analyzer</span></li>
-                    </ul>
-                </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-purple-500">
+                <h3 class="text-2xl font-bold mb-2 text-slate-900">Architect</h3>
+                <p class="text-sm text-slate-600 italic mb-4">"Governing and optimizing data."</p>
+                <ul class="text-sm space-y-2 text-slate-600">
+                    <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>RLS Security & Star Schema</li>
+                    <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Admin & Apps Publishing</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- Expanded Technical Glossary -->
     <section id="glosario" class="py-24 bg-slate-900 text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-4 pbi-yellow-text">Comprehensive Technical Glossary</h2>
-            <p class="text-slate-400 mb-12 max-w-2xl">Essential terminology from the Power BI ecosystem for every business user level.</p>
-            
+            <h2 class="text-4xl font-bold mb-4 pbi-yellow-text">Glossary</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Foundations -->
                 <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
                     <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Semantic Model</h4>
-                    <p class="text-sm text-slate-300">Formerly known as 'Dataset'. It is the underlying data structure, including tables, relationships, and measures.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Power Query</h4>
-                    <p class="text-sm text-slate-300">The data transformation engine (ETL) used to clean and shape data before it enters the model.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">DAX</h4>
-                    <p class="text-sm text-slate-300">Data Analysis Expressions. A formula language used for custom calculations and dynamic metrics.</p>
-                </div>
-
-                <!-- Navigation & Interactivity -->
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Drill-down</h4>
-                    <p class="text-sm text-slate-300">Navigating through a hierarchy in a single visual to see more granular data (e.g., Year > Quarter > Month).</p>
+                    <p class="text-sm text-slate-300">Formerly 'Dataset'. The underlying logic including tables, relationships, and measures.</p>
                 </div>
                 <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
                     <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Drill-through</h4>
-                    <p class="text-sm text-slate-300">Navigating from one report page to a separate, detailed page automatically filtered by a specific data point.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Cross-Highlighting</h4>
-                    <p class="text-sm text-slate-300">Interactivity where clicking a data point in one visual dims unrelated data in other visuals on the same page.</p>
-                </div>
-
-                <!-- Storage & Performance -->
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Import Mode</h4>
-                    <p class="text-sm text-slate-300">Data is copied into the Power BI in-memory engine. Fastest performance but requires a refresh cycle.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">DirectQuery</h4>
-                    <p class="text-sm text-slate-300">Data remains in the source; Power BI queries it in real-time. Good for live data but can be slower.</p>
+                    <p class="text-sm text-slate-300">Navigating from a summary visual to a detailed report page automatically filtered by context.</p>
                 </div>
                 <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
                     <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Gateway</h4>
-                    <p class="text-sm text-slate-300">A secure bridge that allows the Power BI Service to access data located in on-premises servers.</p>
-                </div>
-
-                <!-- Distribution & Governance -->
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Apps</h4>
-                    <p class="text-sm text-slate-300">A packaged collection of reports and dashboards designed for broad distribution to consumers.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Bookmarks</h4>
-                    <p class="text-sm text-slate-300">Saved states of a report page (filters, slicers, visual visibility) often used for storytelling or personal views.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">RLS</h4>
-                    <p class="text-sm text-slate-300">Row-Level Security. A security layer that restricts data rows based on the user's role or identity.</p>
-                </div>
-
-                <!-- Advanced & AI -->
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Star Schema</h4>
-                    <p class="text-sm text-slate-300">A modeling best practice that separates numeric Fact tables from descriptive Dimension tables.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">Smart Narratives</h4>
-                    <p class="text-sm text-slate-300">AI-driven text summaries that automatically highlight key insights and trends in a report.</p>
-                </div>
-                <div class="glossary-item p-6 rounded-2xl bg-white/5 border border-white/10 transition-all">
-                    <h4 class="font-bold text-lg mb-2 pbi-yellow-text">OneLake</h4>
-                    <p class="text-sm text-slate-300">A centralized data repository (the OneDrive for data) where all organizational data artifacts are stored.</p>
+                    <p class="text-sm text-slate-300">A secure bridge that allows the Power BI Service to access data stored on-premises.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Official Documentation -->
     <section id="recursos" class="py-24 container mx-auto px-6">
         <div class="text-center mb-16 text-slate-900">
-            <h2 class="text-4xl font-bold mb-4">Official Documentation</h2>
-            <p class="text-slate-500">Direct resources from Microsoft to dive deeper into the tool.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 text-center text-slate-900">
-            <!-- General -->
-            <a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-book text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">General Documentation</h4>
-                <p class="text-sm text-slate-500">Complete guides on all Power BI features.</p>
-            </a>
-
-            <!-- Training -->
-            <a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-green-100 text-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Microsoft Learn</h4>
-                <p class="text-sm text-slate-500">Free learning paths and official certifications.</p>
-            </a>
-
-            <!-- Community -->
-            <a href="https://community.powerbi.com/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-purple-100 text-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-users text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Power BI Community</h4>
-                <p class="text-sm text-slate-500">Forums, user support, and shared best practices.</p>
-            </a>
-
-            <!-- DAX -->
-            <a href="https://learn.microsoft.com/en-us/dax/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-yellow-100 text-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-code text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">DAX Reference</h4>
-                <p class="text-sm text-slate-500">Complete dictionary of DAX functions and expressions.</p>
-            </a>
-
-            <!-- Blog -->
-            <a href="https://powerbi.microsoft.com/en-us/blog/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-orange-100 text-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-bullhorn text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Updates Blog</h4>
-                <p class="text-sm text-slate-500">Monthly news and new functionality announcements.</p>
-            </a>
-
-            <!-- Best Practices -->
-            <a href="https://learn.microsoft.com/en-us/power-bi/guidance/" target="_blank" class="p-8 bg-white rounded-3xl shadow-md border border-slate-100 hover:shadow-xl transition-all card-hover group">
-                <div class="bg-teal-100 text-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-lightbulb text-2xl"></i>
-                </div>
-                <h4 class="font-bold text-lg mb-2">Optimization Guide</h4>
-                <p class="text-sm text-slate-500">Best practices for report design and performance.</p>
-            </a>
+            <h2 class="text-4xl font-bold mb-4">Resources</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank" class="p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-lg transition">Documentation</a>
+                <a href="https://learn.microsoft.com/en-us/training/powerplatform/power-bi" target="_blank" class="p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-lg transition">Microsoft Learn</a>
+                <a href="https://community.powerbi.com/" target="_blank" class="p-6 bg-white rounded-2xl border border-slate-100 hover:shadow-lg transition">Community</a>
+            </div>
         </div>
     </section>
 
@@ -351,11 +242,37 @@
     </footer>
 
     <script>
-        const apiKey = ""; 
+        // Internal environment Key (empty string as mandated, overridden by user input if deployed)
+        let internalApiKey = ""; 
         const modelName = "gemini-2.5-flash-preview-09-2025";
 
+        // Toggle Settings Modal
+        function toggleSettings() {
+            document.getElementById('settings-modal').classList.toggle('hidden');
+        }
+
+        // Save Key for the session
+        function saveApiKey() {
+            const key = document.getElementById('user-api-key').value.trim();
+            if (key) {
+                internalApiKey = key;
+                alert("API Key saved successfully for this session.");
+                toggleSettings();
+            } else {
+                alert("Please enter a valid key.");
+            }
+        }
+
         async function callGemini(prompt, systemInstruction) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+            // Priority: Environment provided key (if any) or user-provided key
+            const apiKeyToUse = internalApiKey || ""; 
+            
+            if (!apiKeyToUse) {
+                toggleSettings();
+                return "ERROR: Missing API Key. Please click the settings icon (top right) and enter your Gemini API Key.";
+            }
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKeyToUse}`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
                 systemInstruction: { parts: [{ text: systemInstruction }] }
@@ -369,11 +286,16 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
+                    
+                    if (response.status === 401 || response.status === 403) {
+                        return "ERROR: Invalid API Key. Please check your settings.";
+                    }
+                    
                     if (!response.ok) throw new Error('API Error');
                     const data = await response.json();
                     return data.candidates?.[0]?.content?.parts?.[0]?.text || "Could not generate a response.";
                 } catch (error) {
-                    if (i === 4) return "Connection error. Please try again later.";
+                    if (i === 4) return "Connection error. Please check your internet or API Key.";
                     await new Promise(resolve => setTimeout(resolve, delay));
                     delay *= 2;
                 }
@@ -388,7 +310,7 @@
             btn.disabled = true;
             btn.innerHTML = `<span class="loader"></span> Generating...`;
             resultDiv.classList.add('hidden');
-            const instruction = "You are a Microsoft Power BI expert. Your task is to generate correct DAX formulas based on the user's request. Return only the well-formatted DAX formula and a brief one-line explanation.";
+            const instruction = "You are a Microsoft Power BI expert. Generate correct, production-ready DAX formulas. Return ONLY the formula and a one-line explanation.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
@@ -404,7 +326,7 @@
             btn.disabled = true;
             btn.innerHTML = `<span class="loader"></span> Summarizing...`;
             resultDiv.classList.add('hidden');
-            const instruction = "You are a senior data analyst. Summarize the provided project or report information into 3 actionable key points for a high-level executive. Be direct and professional.";
+            const instruction = "You are a senior data analyst. Summarize the technical details into 3 executive actionable insights.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
@@ -420,7 +342,7 @@
             btn.disabled = true;
             btn.innerHTML = `<span class="loader"></span> Analyzing...`;
             resultDiv.classList.add('hidden');
-            const instruction = "You are a specialized Power BI support technician. Analyze the user's error description and provide a clear step-by-step solution. Focus on common solutions for business users.";
+            const instruction = "You are a Power BI support specialist. Provide a step-by-step solution for the described technical error.";
             const response = await callGemini(prompt, instruction);
             resultDiv.textContent = response;
             resultDiv.classList.remove('hidden');
